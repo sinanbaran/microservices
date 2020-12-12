@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Order.Command.Core.Events
+namespace Order.Command.API.Core.Events
 {
     public interface IEventHandler<in TEvent> where TEvent : class, IEvent
     {

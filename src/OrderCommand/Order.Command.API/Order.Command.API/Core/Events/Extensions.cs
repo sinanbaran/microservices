@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Order.Command.Core.Events
+namespace Order.Command.API.Core.Events
 {
     public static class Extensions
     {

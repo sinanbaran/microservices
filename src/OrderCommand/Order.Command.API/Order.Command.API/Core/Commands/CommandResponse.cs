@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using Order.Command.Core.Events;
+using System.Linq;
+using Order.Command.API.Core.Events;
 
-namespace Order.Command.Core.Commands
+namespace Order.Command.API.Core.Commands
 {
     public class CommandResponse
     {
@@ -18,14 +19,8 @@ namespace Order.Command.Core.Commands
         {
             Result = result;
         }
-        public CommandResponse(IEvent @event, object result = null)
-        {
-            Events = new List<IEvent>
-            {
-                @event
-            };
-
-            Result = result;
-        }
+        public CommandResponse()
+        {}
     }
+
 }

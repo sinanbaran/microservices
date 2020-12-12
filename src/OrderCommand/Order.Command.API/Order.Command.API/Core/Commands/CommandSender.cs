@@ -3,14 +3,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Order.Command.Core.Events;
+using Order.Command.API.Core.Events;
 
-namespace Order.Command.Core.Commands
+namespace Order.Command.API.Core.Commands
 {
     internal sealed class CommandSender : ICommandSender
     {
         private readonly IServiceScopeFactory _serviceFactory;
-
         private readonly IMapper _mapper;
         private readonly IEventSender _eventSender;
         private readonly ILogger<CommandSender> _logger;

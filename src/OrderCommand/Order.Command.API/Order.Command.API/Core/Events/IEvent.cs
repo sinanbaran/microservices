@@ -1,6 +1,6 @@
 using System;
 
-namespace Order.Command.Core.Events
+namespace Order.Command.API.Core.Events
 {
     public interface IEvent
     {

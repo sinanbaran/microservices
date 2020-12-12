@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Order.Command.Core.Commands
+namespace Order.Command.API.Core.Commands
 {
     public static class Extensions
     {

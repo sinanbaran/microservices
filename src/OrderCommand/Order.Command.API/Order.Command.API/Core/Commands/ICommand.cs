@@ -1,6 +1,5 @@
-namespace Order.Command.Core.Commands
+namespace Order.Command.API.Core.Commands
 {
-  
     public interface ICommand
     {
     }

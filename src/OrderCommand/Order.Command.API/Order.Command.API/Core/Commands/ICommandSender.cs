@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Order.Command.Core.Commands
+namespace Order.Command.API.Core.Commands
 {
     public interface ICommandSender
     {

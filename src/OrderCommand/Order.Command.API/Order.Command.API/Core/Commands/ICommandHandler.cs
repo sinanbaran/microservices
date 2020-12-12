@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Order.Command.Core.Commands
+namespace Order.Command.API.Core.Commands
 {
     public interface ICommandHandler<in TCommand> where TCommand : class, ICommand
     {

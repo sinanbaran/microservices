@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Order.Command.Core.Events
+namespace Order.Command.API.Core.Events
 {
     internal sealed class EventSender : IEventSender
     {
