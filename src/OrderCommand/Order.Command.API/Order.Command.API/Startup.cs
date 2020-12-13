@@ -21,7 +21,7 @@ namespace Order.Command.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCqrs(); 
+            services.AddCqrs();
             services.AddAutoMapper(typeof(ICommandSender));
             services.AddEventStore();
             services.AddSwaggerDocumentation();
@@ -30,13 +30,12 @@ namespace Order.Command.API
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
 
             app.UseSwaggerDocumentation();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

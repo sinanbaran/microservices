@@ -30,7 +30,8 @@ namespace Order.Command.API.Core.Domain
                 return;
             }
             var streamName = GetStreamName(aggregate, aggregate.Id);
-            await _eventStore.AppendToStreamAsync(streamName, -1, events);
+
+            await _eventStore.AppendToStreamAsync(streamName, aggregate.LastCommittedVersion, events);
         }
         private readonly JsonSerializerSettings _serializerSettings = new JsonSerializerSettings()
         {
@@ -53,7 +54,7 @@ namespace Order.Command.API.Core.Domain
                 if (page.Events.Length > 0)
                 {
                     var @events = page.Events.Select(@event =>
-                         (DomainEvent)JsonConvert.DeserializeObject(Encoding.UTF8.GetString(@event.OriginalEvent.Data),
+                         (IDomainEvent)JsonConvert.DeserializeObject(Encoding.UTF8.GetString(@event.OriginalEvent.Data),
                               Type.GetType(Encoding.UTF8.GetString(@event.OriginalEvent.Metadata))!)
                        ).ToArray();
 

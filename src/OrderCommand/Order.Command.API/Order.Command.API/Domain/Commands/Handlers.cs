@@ -1,11 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Order.Command.API.Core.Commands;
 using Order.Command.API.Core.Domain;
+using Order.Command.API.Core.Events;
+using Order.Command.API.Domain.DomainEvents;
 
 namespace Order.Command.API.Domain.Commands
 {
-    public class Handlers : ICommandHandler<CreateOrderCommand>
+    public class Handlers :
+        ICommandHandler<CreateOrderCommand>,
+        ICommandHandler<PaymentCompletedCommand>
     {
         private readonly AggregateRepository _aggregateRepository;
 
@@ -35,7 +41,26 @@ namespace Order.Command.API.Domain.Commands
             return new CommandResponse()
             {
                 Result = order.OrderNumber,
-                Events = (IList<Core.Events.IEvent>)order.GetChanges()
+                Events = order.GetChanges()
+            };
+        }
+
+        public async Task<CommandResponse> HandleAsync(PaymentCompletedCommand command)
+        {
+            var order = await _aggregateRepository.LoadAsync<OrderAggregate>(command.Id);
+
+            if (order == null)
+                throw new Exception("Order not found");
+
+
+            order.OrderCompleted();
+
+
+            await _aggregateRepository.SaveAsync(order);
+
+            return new CommandResponse()
+            {
+                Events = order.GetChanges()
             };
         }
     }

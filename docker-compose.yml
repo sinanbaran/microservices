@@ -24,14 +24,22 @@ services:
       EVENTSTORE_DEV: 'true'
     restart: always
     
-  order_command_api_1:
-    image: order.command.api
-    environment:
-      - ServiceName=Service Register 1
-      - EventStoreConnection=tcp://admin:changeit@eventstore:1113   
+  order.gateway.api:
+    container_name: ordergatewayapi
+    image: order.gateway.api
     networks:
       - local
     expose:
       - "80"
     ports:
-      - "5119:80"  
+      - "6000:80"
+      
+  order-command-api:
+    container_name: ordercommandapi  
+    image: order.command.api
+    environment:
+      - EventStoreConnection=tcp://admin:changeit@eventstore:1113   
+    networks:
+      - local
+    expose:
+      - "80"

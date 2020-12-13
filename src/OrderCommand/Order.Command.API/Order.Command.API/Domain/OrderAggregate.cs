@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Order.Command.API.Core;
 using Order.Command.API.Core.Domain;
 using Order.Command.API.Domain.DomainEvents;
 
@@ -50,6 +49,7 @@ namespace Order.Command.API.Domain
         }
 
         #region When
+
         public void When(PaymentCompleted @event)
         {
             State = "PaymentCompleted";

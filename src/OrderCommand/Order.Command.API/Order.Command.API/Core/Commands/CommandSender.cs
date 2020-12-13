@@ -40,6 +40,7 @@ namespace Order.Command.API.Core.Commands
                 response = await handler.HandleAsync(command);
                 foreach (var @event in response.Events)
                 {
+
                     dynamic concreteObject = _mapper.Map(@event, @event.GetType(), @event.GetType());
 
                     _eventSender.PublishAsync(concreteObject);

@@ -1,5 +1,4 @@
 ﻿using System;
-using Order.Command.API.Core;
 using Order.Command.API.Core.Domain;
 
 namespace Order.Command.API.Domain.DomainEvents
