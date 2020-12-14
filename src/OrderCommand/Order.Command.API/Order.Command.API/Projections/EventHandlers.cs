@@ -28,14 +28,11 @@ namespace Order.Command.API.Projections
                 CreatedOn = @event.CreatedOn,
                 Id = @event.AggregateId,
             });
-
-            //   var item = _dbContext.OrderMaterializedView().Find(x => x.Id == @event.AggregateId).FirstOrDefault();
             return Task.CompletedTask;
         }
 
         public Task HandleAsync(OrderItemAdded @event)
         {
-            // var item = _dbContext.OrderMaterializedView().Find(x => x.Id == @event.AggregateId).FirstOrDefault();
 
             var filter = Builders<OrderMaterializedView>.Filter.Eq(x => x.Id, @event.AggregateId);
 
@@ -55,8 +52,6 @@ namespace Order.Command.API.Projections
 
         public Task HandleAsync(PaymentStateChanged @event)
         {
-            //var item = _dbContext.OrderMaterializedView().Find(x => x.Id == @event.AggregateId).FirstOrDefault();
-
 
             var filter = Builders<OrderMaterializedView>.Filter.Eq(x => x.Id, @event.AggregateId);
 

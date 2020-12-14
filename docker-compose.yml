@@ -39,9 +39,9 @@ services:
     networks:
       - local
     expose:
-      - "80"
+      - 80
     ports:
-      - "6000:80"
+      - 6000:80
       
   order-command-api:
     container_name: ordercommandapi 
@@ -54,7 +54,7 @@ services:
     networks:
       - local
     expose:
-      - "80"
+      - 80
 
   order-query-py:
     container_name: orderquerypy
