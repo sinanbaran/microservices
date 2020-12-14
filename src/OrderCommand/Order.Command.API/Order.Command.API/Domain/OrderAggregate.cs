@@ -23,7 +23,11 @@ namespace Order.Command.API.Domain
                 CreatedOn = DateTime.Now,
                 OrderNumber = new Random().Next(0, 80000).ToString().PadLeft(10, '0'),
                 Owner = owner,
-                State = "WaitingToPay"
+            });
+            Apply(new PaymentStateChanged()
+            {
+                AggregateId = id,
+                State = "PaymentWaiting"
             });
             return this;
         }
@@ -41,24 +45,29 @@ namespace Order.Command.API.Domain
         }
         public OrderAggregate OrderCompleted()
         {
-            Apply(new PaymentCompleted()
+            if (State == "PaymentCompleted")
+                throw new Exception("State already Completed");
+            
+            Apply(new PaymentStateChanged()
             {
                 AggregateId = Id,
+                State = "PaymentCompleted"
             });
             return this;
         }
 
         #region When
 
-        public void When(PaymentCompleted @event)
+        public void When(PaymentStateChanged @event)
         {
-            State = "PaymentCompleted";
+            State = @event.State;
         }
 
         public void When(OrderItemAdded @event)
         {
             OrderItems.Add(new OrderItem()
             {
+
                 Name = @event.Name,
                 Quantity = @event.Quantity,
                 UnitPrice = @event.UnitPrice,
@@ -71,7 +80,6 @@ namespace Order.Command.API.Domain
             CreatedOn = @event.CreatedOn;
             OrderNumber = @event.OrderNumber;
             Owner = @event.Owner;
-            State = @event.State;
         }
         #endregion
 

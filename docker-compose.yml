@@ -5,7 +5,16 @@ networks:
     driver: bridge
 
 services:
-
+  mongodb:
+    container_name: mongodb
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+    networks:
+      - local 
+    ports:
+      - 27017:27017
   eventstore:
     container_name: eventstore
     image: eventstore/eventstore:release-5.0.8
@@ -22,7 +31,7 @@ services:
       PROJECTION_THREADS: 8
       EVENTSTORE_INSECURE: 'true'
       EVENTSTORE_DEV: 'true'
-    restart: always
+    restart: always 
     
   order.gateway.api:
     container_name: ordergatewayapi
@@ -35,11 +44,25 @@ services:
       - "6000:80"
       
   order-command-api:
-    container_name: ordercommandapi  
+    container_name: ordercommandapi 
     image: order.command.api
     environment:
-      - EventStoreConnection=tcp://admin:changeit@eventstore:1113   
+      - ServiceName= Server 1
+      - EventStoreConnection=tcp://admin:changeit@eventstore:1113
+      - MongoConnection=mongodb://root:password@mongodb:27017/?authSource=admin
+      - MongoDatabase=OrderAggregate    
     networks:
       - local
     expose:
       - "80"
+
+  order-query-py:
+    container_name: orderquerypy
+    image: order.query.py.api
+    networks:
+      - local
+    environment:
+       PORT: 5000
+       FLASK_DEBUG: 1
+    ports:
+        - 5000:5000

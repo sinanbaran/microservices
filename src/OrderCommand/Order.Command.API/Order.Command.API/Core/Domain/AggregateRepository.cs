@@ -65,7 +65,8 @@ namespace Order.Command.API.Core.Domain
                 nextPageStart = !page.IsEndOfStream ? page.NextEventNumber : -1;
             } while (nextPageStart != -1);
 
-            return aggregate;
+
+            return aggregate.Id == Guid.Empty ? null : aggregate;
         }
 
         private string GetStreamName<T>(T type, Guid aggregateId) => $"{type.GetType().Name}-{aggregateId}";

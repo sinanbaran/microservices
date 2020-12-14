@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Order.Command.API.Core;
 using Order.Command.API.Core.Commands;
+using Order.Command.API.Projections.MongoDb;
 
 
 namespace Order.Command.API
@@ -27,12 +28,15 @@ namespace Order.Command.API
             services.AddSwaggerDocumentation();
             services.AddControllers();
 
+            services.AddTransient<IMongoDbContext, MongoDbContext>();
+
         }
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseSwaggerDocumentation();
             //app.UseHttpsRedirection();

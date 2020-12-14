@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Order.Command.API.Core.Commands;
 using Order.Command.API.Core.Domain;
-using Order.Command.API.Core.Events;
-using Order.Command.API.Domain.DomainEvents;
 
 namespace Order.Command.API.Domain.Commands
 {

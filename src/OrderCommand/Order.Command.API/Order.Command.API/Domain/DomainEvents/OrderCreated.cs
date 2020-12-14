@@ -10,6 +10,5 @@ namespace Order.Command.API.Domain.DomainEvents
         public string OrderNumber { get; set; }
         public DateTime CreatedOn { get; set; }
         public string Owner { get; set; }
-        public string State { get; set; }
-    }
+      }
 }
