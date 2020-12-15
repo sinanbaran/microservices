@@ -66,3 +66,11 @@ services:
        FLASK_DEBUG: 1
     ports:
         - 5000:5000
+
+  order-query-go:
+    container_name: orderquerygo
+    image: order.query.go.api
+    networks:
+      - local
+    ports:
+        - 8081:8081        

@@ -1,6 +1,7 @@
 .git
 __pycache__
 .vscode
+__debug_bin
 *.pyc
 *.pyo
 *.pyd
