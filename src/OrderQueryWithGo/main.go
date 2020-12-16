@@ -34,13 +34,15 @@ func GetError(err error, w http.ResponseWriter) {
 }
 
 type OrderView struct {
-	Owner       string        `json:"Owner,omitempty" bson:"Owner,omitempty"`
-	OrderNumber string        `json:"OrderNumber,omitempty" bson:"OrderNumber,omitempty"`
-	State       string        `json:"State,omitempty" bson:"State,omitempty"`
 	CreatedOn   time.Time     `json:"CreatedOn,omitempty" bson:"CreatedOn,omitempty"`
 	Items       []ProductItem `json:"Items"`
+	OrderNumber string        `json:"OrderNumber,omitempty" bson:"OrderNumber,omitempty"`
+	Owner       string        `json:"Owner,omitempty" bson:"Owner,omitempty"`
+	State       string        `json:"State,omitempty" bson:"State,omitempty"`
+	Id          string
 }
 type ProductItem struct {
+	ProdutId   string
 	Name       string  `json:"Name,omitempty" bson:"Name,omitempty"`
 	Quantity   int     `json:"Quantity,omitempty" bson:"Quantity,omitempty"`
 	TotalPrice float32 `json:"TotalPrice,omitempty" bson:"TotalPrice,omitempty"`

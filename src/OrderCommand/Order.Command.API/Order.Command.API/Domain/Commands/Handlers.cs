@@ -9,9 +9,9 @@ namespace Order.Command.API.Domain.Commands
         ICommandHandler<CreateOrderCommand>,
         ICommandHandler<PaymentCompletedCommand>
     {
-        private readonly AggregateRepository _aggregateRepository;
+        private readonly IAggregateRepository _aggregateRepository;
 
-        public Handlers(AggregateRepository aggregateRepository)
+        public Handlers(IAggregateRepository aggregateRepository)
         {
             _aggregateRepository = aggregateRepository;
         }

@@ -32,7 +32,7 @@ namespace Order.Command.API
             connection.ConnectAsync().GetAwaiter().GetResult();
             collection.AddSingleton(connection);
 
-            collection.AddScoped<AggregateRepository>();
+            collection.AddScoped<IAggregateRepository, AggregateRepository>();
 
             return collection;
         }

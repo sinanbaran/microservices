@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 
 namespace Order.Command.API.Core.Domain
 {
-    public class AggregateRepository
+    public class AggregateRepository : IAggregateRepository
     {
         private readonly IEventStoreConnection _eventStore;
 
@@ -18,7 +18,6 @@ namespace Order.Command.API.Core.Domain
 
         public async Task SaveAsync<T>(T aggregate) where T : Aggregate, new()
         {
-
             var events = aggregate.GetChanges()
                 .Select(@event => new EventData(Guid.NewGuid(), @event.GetType().Name, true,
                     Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(@event, _serializerSettings)),
@@ -69,7 +68,14 @@ namespace Order.Command.API.Core.Domain
             return aggregate.Id == Guid.Empty ? null : aggregate;
         }
 
-        private string GetStreamName<T>(T type, Guid aggregateId) => $"{type.GetType().Name}-{aggregateId}";
+        public string GetStreamName<T>(T type, Guid aggregateId) => $"{type.GetType().Name}-{aggregateId}";
+    }
+
+    public interface IAggregateRepository
+    {
+        Task SaveAsync<T>(T aggregate) where T : Aggregate, new();
+        Task<T> LoadAsync<T>(Guid aggregateId) where T : Aggregate, new();
+        string GetStreamName<T>(T type, Guid aggregateId);
     }
 }
 
