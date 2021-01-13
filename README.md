@@ -5,16 +5,18 @@ CQRS DDD EventSource(EventStore) and Materialized view with mongo
 Command with Net.Core
 Query with Python&GO
 
+```
+`run start.bat`
 
-run start.bat
 
 eventstore : http://localhost:2113/
 authantication information in docker-compose
 
+
 mongodb ide : https://docs.mongodb.com/compass/current/install
+
 mongodb://root:password@localhost:27017/?authSource=admin
-
-
+```
 
 ``` json
 POST - http://localhost:6000/create
