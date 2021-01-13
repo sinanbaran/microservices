@@ -9,8 +9,9 @@ Query with Python&GO
 run start.bat
 
 
-POST - http://localhost:6000/create
+
 ``` json
+POST - http://localhost:6000/create
 {
     "id": "2b4d9300-bb65-48b2-9ade-1c2d16f06201",
     "owner": "sinan",
@@ -29,4 +30,14 @@ POST - http://localhost:6000/create
         }
     ]
 }
+```
+
+``` json
+PATCH - http://localhost:6000/complete
+{
+      "id": "2b4d9300-bb65-48b2-9ade-1c2d16f06200"
+}
+```
+``` json
+GET - http://localhost:6000/list
 ```
